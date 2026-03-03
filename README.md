@@ -1,4 +1,4 @@
-<img alt="Awlise: An awmazing API wrapper for Alise" src=".github/assets/banner.svg" width="100%" />
+<img alt="Awlise: An awmazing API wrapper for Alise" src="https://raw.githubusercontent.com/Awakno/Alise-api/main/.github/assets/banner.svg" width="100%" />
 
 _This library **is not** affiliated with [Alise](https://alise.net/) in any way._
 
@@ -17,6 +17,8 @@ pip install awlise
 ## Usage
 
 ```python
+import asyncio
+
 from awlise import login_credentials
 
 # Example usage
@@ -24,16 +26,6 @@ session = asyncio.run(
     login_credentials(site_id="example_site", username="user", password="password")
 )
 ```
-
-## Implementations
-
-You're currently on the `index` branch.
-
-Since we're implementing this library in different programming languages, we have a branch for each of them.
-
-| [JS/TS](https://github.com/LiterateInk/Awlise/tree/js) | Rust | Python | Swift |
-| :----------------------------------------------------: | :--: | :----: | :---: |
-|                         Kotlin                         |  C#  |  Dart  |       |
 
 ## Contributing
 

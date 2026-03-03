@@ -1,7 +1,45 @@
 [build-system]
-requires = ["setuptools", "wheel", "dotenv", "pydantic"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Awlise"
+name = "awlise"
 version = "1.0.0"
+description = "An awmazing API wrapper for Alise."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-3.0-or-later"
+authors = [
+	{ name = "Awakno", email = "contact@awakno.fr" }
+]
+keywords = ["alise", "api", "wrapper", "booking", "aiohttp"]
+classifiers = [
+	"Development Status :: 4 - Beta",
+	"Intended Audience :: Developers",
+	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3 :: Only",
+	"Programming Language :: Python :: 3.8",
+	"Programming Language :: Python :: 3.9",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+	"Operating System :: OS Independent"
+]
+dependencies = [
+	"aiohttp>=3.8.0",
+	"beautifulsoup4>=4.12.0",
+	"pydantic>=1.10"
+]
+
+[project.urls]
+Homepage = "https://github.com/Awakno/Alise-api"
+Repository = "https://github.com/Awakno/Alise-api"
+Issues = "https://github.com/Awakno/Alise-api/issues"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["awlise*"]
+exclude = ["awlise.tests*"]
