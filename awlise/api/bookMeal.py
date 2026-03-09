@@ -1,5 +1,7 @@
 from urllib.parse import urlencode
 
+import aiohttp
+
 from awlise.core.request import Request
 from awlise.models.session import Session
 
@@ -47,7 +49,7 @@ async def bookMeal(
     request_post = Request(endpoint)
     request_post.set_session(session.get("id"))
     request_post.set_form_data(urlencode(form_data))
-    response_post = await request_post.send(session)
-    if len(response_post["content"]) > 100: # Comment: the page for successful booking is just a meta with redirect, but the page for failed booking is a full HTML page with error message, so we can use the content length to determine if the booking was successful or not.
+    response_post: aiohttp.ClientResponse = await request_post.send(session)
+    if len(response_post.text()) > 100: # Comment: the page for successful booking is just a meta with redirect, but the page for failed booking is a full HTML page with error message, so we can use the content length to determine if the booking was successful or not.
         return False
     return 200 <= response_post["status"] < 400
