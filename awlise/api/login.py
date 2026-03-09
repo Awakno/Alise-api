@@ -32,7 +32,7 @@ async def default_fetcher(req: Request):
                 response_headers = [
                     (key.lower(), value) for key, value in response.headers.items()
                 ]
-                return {"status": status, "headers": response_headers, "bytes": bytes_data}
+                return {"status": status, "headers": response_headers, "bytes": bytes_data, "text": bytes_data.decode("utf-8", errors="ignore")}
     except aiohttp.ClientError as e:
         raise FetcherError(f"HTTP request failed: {e}")
 
