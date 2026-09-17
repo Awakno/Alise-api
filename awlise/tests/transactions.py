@@ -1,15 +1,14 @@
 import asyncio
 import os
+
 from dotenv import load_dotenv
 
-from awlise.api.login import login_credentials
-from awlise.api.operation import getOperation
+from awlise import AliseClient
 
 load_dotenv()
-
+site_id = os.getenv("ALISE_SITE_ID")
 username = os.getenv("ALISE_USERNAME")
 password = os.getenv("ALISE_PASSWORD")
-site_id = os.getenv("ALISE_SITE_ID")
 
 if not username or not password or not site_id:
     raise ValueError(
@@ -17,15 +16,14 @@ if not username or not password or not site_id:
     )
 
 
-def test_operation():
+def test_transactions():
     try:
-        session = asyncio.run(login_credentials(site_id, username, password))
-        operations = asyncio.run(getOperation(session))
-        return operations
+        client = asyncio.run(AliseClient.from_credentials(site_id, username, password))
+        return asyncio.run(client.list_transactions())
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
 
 
 if __name__ == "__main__":
-    print(test_operation())
+    print(test_transactions())

@@ -1,15 +1,15 @@
 import re
 from bs4 import BeautifulSoup
 
-from awlise.models.home import Home
+from awlise.models.account import Account
 
 
-def _html_home_parser(html: str) -> dict:
+def _html_account_parser(html: str) -> Account:
     """
-    Parses the HTML content of the home page.
+    Parses the HTML content of the account dashboard page.
 
-    :param html: The HTML content of the hom./e page.
-    :return: A dictionary containing the parsed data.
+    :param html: The HTML content of the dashboard page.
+    :return: An Account object.
     """
     user_data = {}
     soup = BeautifulSoup(html, "html.parser")
@@ -24,7 +24,7 @@ def _html_home_parser(html: str) -> dict:
             user_data["responsable_last_name"] = parts[1] if len(parts) > 1 else ""
 
         if "adresse" in p.get("class", []):
-            user_data["adress"] = p.text.strip()
+            user_data["address"] = p.text.strip()
 
     # Extracting balance
     label = soup.find("label", class_="soldeplus")
@@ -36,7 +36,7 @@ def _html_home_parser(html: str) -> dict:
             else:
                 user_data["balance"] = (0.0, "€")
         except ValueError:
-            user_data["balance"] = (0.0,"€")  # Default to 0.0 if parsing fails
+            user_data["balance"] = (0.0, "€")  # Default to 0.0 if parsing fails
 
     # Extracting child information
     select = soup.find("select", class_="eleve")
@@ -46,13 +46,10 @@ def _html_home_parser(html: str) -> dict:
             child_name = option.text.strip()
             child_name_cleaned = re.sub(r"\s*\(.*?\)", "", child_name).strip()  # Remove text in parentheses
             parts = child_name_cleaned.split(" ", 1)
-            user_data["childs"] = {
+            user_data["child"] = {
                 "name": child_name_cleaned,
                 "first_name": parts[0],
                 "last_name": parts[1] if len(parts) > 1 else "",
             }
 
-    # Extracting booking price
-
-
-    return Home(**user_data)
+    return Account(**user_data)

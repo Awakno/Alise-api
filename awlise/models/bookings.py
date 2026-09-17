@@ -3,10 +3,10 @@ import pydantic
 
 class Booking(pydantic.BaseModel):
     """
-    A booking object.
+    A single day's booking status on the calendar.
     """
     status: str
     cancelable: bool = False
-    link: str = None
-    date: str = None
-    identifier: str = None
+    link: str | None = None
+    date: str | None = None
+    identifier: str | None = None

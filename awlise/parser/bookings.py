@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 
-def _html_booking_parser(html: str) -> list:
+def _html_bookings_parser(html: str) -> list:
     """
     Parses the HTML content of the booking page.
 

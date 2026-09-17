@@ -1,24 +1,49 @@
-from .api.login import login_credentials
-from .api.home import home
-from .api.getBooking import getBookings
-from .api.bookMeal import bookMeal
-from .api.getBookingDetail import getBookingDetail, getBookingDetailByDateISO8601
-from .parser.bookings import _html_booking_parser
-from .parser.home import _html_home_parser
-from .models.session import Session
-from .models.authentification import Authentification
+from .client import AliseClient
+from .api.auth import login_with_credentials, login_with_token
+from .api.account import get_account
+from .api.bookings import book_meal, cancel_meal, get_booking, get_booking_by_date, list_bookings
+from .api.payments import get_meal_price
+from .api.transactions import list_transactions
 from .core.request import Request
+from .models.account import Account, Child
+from .models.bookings import Booking
+from .models.session import Session
+from .models.transactions import Transaction
+from .exceptions import (
+    AwliseError,
+    RequestError,
+    FetcherError,
+    AuthenticationError,
+    AccountError,
+    BookingError,
+    TransactionError,
+    PaymentError,
+)
 
 __all__ = [
-    "login_credentials",
-    "home",
-    "getBookings",
-    "_html_booking_parser",
-    "_html_home_parser",
-    "Session",
-    "Authentification",
+    "AliseClient",
+    "login_with_credentials",
+    "login_with_token",
+    "get_account",
+    "list_bookings",
+    "get_booking",
+    "get_booking_by_date",
+    "book_meal",
+    "cancel_meal",
+    "list_transactions",
+    "get_meal_price",
     "Request",
-    "bookMeal",
-    "getBookingDetail",
-    "getBookingDetailByDateISO8601",
+    "Session",
+    "Account",
+    "Child",
+    "Booking",
+    "Transaction",
+    "AwliseError",
+    "RequestError",
+    "FetcherError",
+    "AuthenticationError",
+    "AccountError",
+    "BookingError",
+    "TransactionError",
+    "PaymentError",
 ]

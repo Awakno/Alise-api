@@ -1,11 +1,6 @@
-from typing import Any
 from urllib.parse import urljoin
 
-
-class RequestError(Exception):
-    """Custom exception for request errors."""
-
-    pass
+from ..exceptions import RequestError
 
 
 class Request:
@@ -28,14 +23,13 @@ class Request:
     def set_session(self, session_id: str):
         self.cookies["PHPSESSID"] = session_id
 
-    async def send(self, fetcher: dict[str, Any]):
+    async def send(self, session: dict):
         """
-        Sends the request using the provided fetcher function.
+        Sends the request using the fetcher stored on the given session.
 
-        :param fetcher: A callable that performs the HTTP request.
+        :param session: A Session dict, holding the `fetcher` callable to use.
         :return: The response from the fetcher.
         """
-        # Ensure cookies are included in the headers
         if self.cookies:
             cookie_header = "; ".join(
                 f"{key}={value}" for key, value in self.cookies.items()
@@ -43,6 +37,6 @@ class Request:
             self.headers["Cookie"] = cookie_header
 
         try:
-            return await fetcher["fetcher"](self)
+            return await session["fetcher"](self)
         except Exception as e:
             raise RequestError(f"Failed to send request: {e}")
