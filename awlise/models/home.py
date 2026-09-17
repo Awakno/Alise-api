@@ -20,3 +20,4 @@ class Home(pydantic.BaseModel):
     adress: str = None
     balance: tuple[float, str] = None
     childs: ChildProps = None
+

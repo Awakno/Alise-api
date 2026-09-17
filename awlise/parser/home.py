@@ -8,7 +8,7 @@ def _html_home_parser(html: str) -> dict:
     """
     Parses the HTML content of the home page.
 
-    :param html: The HTML content of the home page.
+    :param html: The HTML content of the hom./e page.
     :return: A dictionary containing the parsed data.
     """
     user_data = {}
@@ -52,4 +52,7 @@ def _html_home_parser(html: str) -> dict:
                 "last_name": parts[1] if len(parts) > 1 else "",
             }
 
-    return Home(**user_data)  # Returning dictionary instead of Home object for now
+    # Extracting booking price
+
+
+    return Home(**user_data)
